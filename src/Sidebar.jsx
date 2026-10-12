@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import { MyContext } from "./MyContext.jsx";
 import { v1 as uuidv1 } from "uuid";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "./api";
 
 
 function sidebar() {
@@ -24,7 +25,7 @@ function sidebar() {
             setAllThreads([]);
             return;
         }
-      const response = await fetch("http://localhost:8080/api/thread",{
+      const response = await fetch(`${API_BASE_URL}/api/thread`,{
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -70,7 +71,7 @@ function sidebar() {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
-        `http://localhost:8080/api/thread/${newThreadId}`,{
+        `${API_BASE_URL}/api/thread/${newThreadId}`,{
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -89,7 +90,7 @@ function sidebar() {
   const deleteThread = async(threadId) =>{
     const token = localStorage.getItem("token");
     try{
-        const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, {method: "DELETE",headers: {
+        const response = await fetch(`${API_BASE_URL}/api/thread/${threadId}`, {method: "DELETE",headers: {
             Authorization: `Bearer ${token}`,
         },});
         const res = await response.json();

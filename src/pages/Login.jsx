@@ -1,6 +1,7 @@
 import "./Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../api";
 function Login() {
 
     const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ function Login() {
         try {
 
             const response = await fetch(
-                "http://localhost:8080/api/auth/login",
+                `${API_BASE_URL}/api/auth/login`,
                 {
                     method: "POST",
                     headers: {

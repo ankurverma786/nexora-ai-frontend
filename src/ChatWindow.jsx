@@ -3,6 +3,7 @@ import Chat from "./Chat.jsx";
 import { MyContext } from "./MyContext.jsx";
 import { useContext, useState, useEffect, useRef } from "react";
 import { ScaleLoader } from "react-spinners";
+import API_BASE_URL from "./api";
 
 import { useNavigate } from "react-router-dom";
 
@@ -54,7 +55,7 @@ function ChatWindow() {
 
         console.log("🚀 1. Upload function started");
         const response = await fetch(
-            "http://localhost:8080/api/document/upload",
+            `${API_BASE_URL}/api/document/upload`,
             {
                 method: "POST",
 
@@ -126,8 +127,8 @@ if (token) {
     options.headers.Authorization = `Bearer ${token}`;
 }
 const endpoint = token
-      ? "http://localhost:8080/api/chat"
-      : "http://localhost:8080/api/guest-chat";
+      ? `${API_BASE_URL}/api/chat`
+      : `${API_BASE_URL}/api/guest-chat`;
 
       const startTime = performance.now();
     try {
