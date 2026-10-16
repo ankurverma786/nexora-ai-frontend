@@ -17,6 +17,8 @@ RUN npm run build
 # Stage 2: Serve production files with Nginx
 FROM nginx:alpine
 
+LABEL org.opencontainers.image.source="https://github.com/ankurverma786/nexora-ai-frontend"
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 
