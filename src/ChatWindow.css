@@ -212,26 +212,27 @@
 
 
 /* ===== Chat Loader ===== */
-.loader {
-  width: 100%;
-  max-width: 800px;
-  flex-shrink: 0;
+
+.chat-loader-overlay {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0 24px 8px;
-  margin: 0 auto;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
 }
+
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .loader {
+  .chat-loader-overlay {
     padding: 0 14px 6px;
   }
 }
 
 @media (max-width: 480px) {
-  .loader {
+  .chat-loader-overlay {
     padding: 0 10px 5px;
   }
 }

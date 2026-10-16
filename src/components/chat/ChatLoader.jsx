@@ -5,7 +5,7 @@ function ChatLoader({ loading }) {
   if (!loading) return null;
 
   return (
-    <div className="loader">
+    <div className="chat-loader-overlay">
       <ScaleLoader color="#ffffff" />
     </div>
   );
