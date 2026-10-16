@@ -1,34 +1,18 @@
 import "./Chat.css";
-import { useContext, useState, useEffect } from "react";
-import { MyContext } from "./MyContext";
+import { useContext } from "react";
+import { MyContext } from "./MyContext.jsx";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
 
+import useChatAnimation from "./hooks/useChatAnimation.js";
+
 function Chat() {
   const { newChat, prevChats, reply } = useContext(MyContext);
-  const [lastestReply, setLastestReply] = useState(null);
-
-  useEffect(() => {
-    if (reply == null) {
-      setLastestReply(null);
-      return;
-    }
-
-    if (!prevChats?.length) return;
-
-    const content = reply.split(" ");
-
-    let idx = 0;
-    const interval = setInterval(() => {
-      setLastestReply(content.slice(0, idx + 1).join(" "));
-
-      idx++;
-      if (idx >= content.length) clearInterval(interval);
-    }, 40);
-
-    return () => clearInterval(interval);
-  }, [prevChats, reply]);
+  const latestReply = useChatAnimation({
+    prevChats,
+    reply,
+  });
 
   return (
     <>
@@ -51,16 +35,16 @@ function Chat() {
 
         {prevChats.length > 0 && (
           <>
-            {lastestReply === null ? (
-              <div className="gptDiv" key={"typing"}>
+            {latestReply === null ? (
+              <div className="gptDiv" key="typing">
                 <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
                   {prevChats[prevChats.length - 1].content}
                 </ReactMarkdown>
               </div>
             ) : (
-              <div className="gptDiv" key={"typing"}>
+              <div className="gptDiv" key="typing">
                 <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
-                  {lastestReply}
+                  {latestReply}
                 </ReactMarkdown>
               </div>
             )}

@@ -1,0 +1,184 @@
+
+/* ===== Input Container ===== */
+.inputBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ===== Hidden PDF Input ===== */
+.fileInput {
+  display: none;
+}
+
+/* ===== Attach PDF Button ===== */
+.attachButton {
+  position: absolute;
+  left: 12px;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #b4b4b4;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.attachButton:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.attachButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== Message Input ===== */
+.messageInput {
+  width: 100%;
+  min-width: 0;
+  min-height: 58px;
+  padding: 18px 62px 18px 55px;
+
+  border: 1px solid #383838;
+  border-radius: 16px;
+  outline: none;
+
+  background-color: #2b2b2b;
+  color: #f5f5f5;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.messageInput::placeholder {
+  color: #929292;
+}
+
+.messageInput:hover {
+  border-color: #505050;
+}
+
+.messageInput:focus {
+  border-color: #666;
+  background-color: #2e2e2e;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.03);
+  outline: none;
+}
+
+/* ===== Send Button ===== */
+#submit {
+  position: absolute;
+  right: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+  appearance: none;
+  background: #ececec;
+  color: #212121;
+
+  font-size: 18px;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#submit:hover:not(:disabled) {
+  background: #fff;
+  transform: scale(1.05);
+}
+
+#submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#submit i {
+  color: inherit;
+}
+
+#submit i:hover {
+  color: inherit;
+}
+
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .messageInput {
+    min-height: 54px;
+    padding: 15px 56px 15px 48px;
+    font-size: 14px;
+  }
+
+  .attachButton {
+    left: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  #submit {
+    right: 8px;
+    width: 33px;
+    height: 33px;
+  }
+}
+
+@media (max-width: 480px) {
+  .messageInput {
+    min-height: 50px;
+    padding: 13px 48px 13px 42px;
+    border-radius: 13px;
+    font-size: 13px;
+  }
+
+  .attachButton {
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 17px;
+  }
+
+  #submit {
+    right: 6px;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+}

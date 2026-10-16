@@ -1,12 +1,12 @@
+
 import "./Sidebar.css";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { MyContext } from "./MyContext.jsx";
-import { v1 as uuidv1 } from "uuid";
 import { useNavigate } from "react-router-dom";
-import API_BASE_URL from "./api";
+import useThreads from "./hooks/useThreads.js";
+import blackLogo from "./assets/blacklogo.png";
 
-
-function sidebar() {
+function Sidebar() {
   const {
     allThreads,
     setAllThreads,
@@ -17,97 +17,29 @@ function sidebar() {
     setCurrThreadId,
     setPrevChats,
   } = useContext(MyContext);
+
   const navigate = useNavigate();
-  const getAllThreads = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-            setAllThreads([]);
-            return;
-        }
-      const response = await fetch(`${API_BASE_URL}/api/thread`,{
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-      const res = await response.json();
-      if (!response.ok) {
-            console.log("Failed to fetch threads:", res);
-            return;
-      }
-      const filteredData = res.map((thread) => ({
-        threadId: thread.threadId,
-        title: thread.title,
-      }));
 
-      setAllThreads(filteredData);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getAllThreads();
-  }, [currThreadId]);
-
-  const createNewChat = () => {
-
-    const token = localStorage.getItem('token');
-    if(!token){
-      navigate('/login');
-      return;
-    }
-
-
-    setNewChat(true);
-    setPrompt("");
-    setReply(null);
-    setCurrThreadId(uuidv1());
-    setPrevChats([]);
-  };
-
-  const changeThread = async (newThreadId) => {
-    setCurrThreadId(newThreadId);
-    const token = localStorage.getItem("token");
-    try {
-      const response = await fetch(
-        `${API_BASE_URL}/api/thread/${newThreadId}`,{
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-      const res = await response.json();
-      console.log(res);
-      setPrevChats(res);
-      setNewChat(false);
-      setReply(null);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-
-  const deleteThread = async(threadId) =>{
-    const token = localStorage.getItem("token");
-    try{
-        const response = await fetch(`${API_BASE_URL}/api/thread/${threadId}`, {method: "DELETE",headers: {
-            Authorization: `Bearer ${token}`,
-        },});
-        const res = await response.json();
-
-        setAllThreads(prev => prev.filter(thread => thread.threadId !== threadId));
-        if(threadId === currThreadId){
-            createNewChat();
-        }
-    }catch(err){
-        console.log(err);
-    }
-  }
+  const {
+    createNewChat,
+    changeThread,
+    deleteThread,
+  } = useThreads({
+    allThreads,
+    setAllThreads,
+    currThreadId,
+    setCurrThreadId,
+    setPrompt,
+    setNewChat,
+    setReply,
+    setPrevChats,
+    navigate,
+  });
 
   return (
     <section className="sidebar">
       <button onClick={createNewChat}>
-        <img src="src/assets/blacklogo.png" alt="gpt logo" />
+        <img src={blackLogo} alt="Nexora AI logo" />
         <i className="fa-solid fa-pen-to-square"></i>
       </button>
 
@@ -137,4 +69,4 @@ function sidebar() {
   );
 }
 
-export default sidebar;
+export default Sidebar;

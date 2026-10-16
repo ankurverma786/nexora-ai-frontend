@@ -1,0 +1,147 @@
+
+/* ===== Uploaded PDF Card ===== */
+.selectedFile {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin: 0 auto 8px;
+  padding: 12px 16px;
+
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  background: #292929;
+  color: #f5f5f5;
+
+  text-align: left;
+  transition: border-color 0.2s ease;
+}
+
+.selectedFile:hover {
+  border-color: #505050;
+}
+
+/* ===== PDF File Information ===== */
+.fileInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  flex: 1;
+  min-width: 0;
+}
+
+.fileInfo .fa-file-pdf {
+  flex-shrink: 0;
+  color: #ff7070;
+  font-size: 24px;
+}
+
+.fileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  min-width: 0;
+}
+
+.fileDetails > span {
+  overflow-wrap: anywhere;
+  color: #f5f5f5;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.fileDetails small {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ===== Document Processing Status ===== */
+.documentStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.documentStatus.queued {
+  color: #f4c66a;
+}
+
+.documentStatus.processing {
+  color: #75baff;
+}
+
+.documentStatus.completed {
+  color: #70dfa0;
+}
+
+.documentStatus.failed,
+.statusError {
+  color: #ff8585;
+}
+
+/* ===== Error Message ===== */
+.statusError {
+  width: 100%;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ===== Remove PDF Button ===== */
+.removeFile {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #aaa;
+
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.removeFile:hover {
+  background: #414141;
+  color: #fff;
+}
+
+.removeFile:focus-visible {
+  outline: 2px solid #10a37f;
+  outline-offset: 2px;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 480px) {
+  .selectedFile {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .fileInfo {
+    gap: 9px;
+  }
+
+  .fileInfo .fa-file-pdf {
+    font-size: 21px;
+  }
+
+  .fileDetails > span {
+    font-size: 12px;
+  }
+}
